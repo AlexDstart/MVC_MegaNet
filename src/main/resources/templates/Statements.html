@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Все заявки</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e1f5e1;
+        }
+
+        td {
+            color: #333;
+        }
+
+        /* Адаптивная таблица для небольших экранов */
+        @media (max-width: 768px) {
+            table {
+                width: 100%;
+            }
+
+            th, td {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            h2 {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h2>Список всех заявок</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>Имя</th>
+        <th>Адрес</th>
+        <th>Мобильный телефон</th>
+        <th>Описание</th>
+        <th>Тариф</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Проходим по списку заявок и выводим каждую заявку -->
+    <tr th:each="statement : ${statements}">
+        <td th:text="${statement.name}"></td>
+        <td th:text="${statement.street + ', ' + statement.homeNumber + ', ' + statement.city}"></td>
+        <td th:text="${statement.mobileNumber}"></td>
+        <td th:text="${statement.description}"></td>
+        <td th:text="${statement.tariff}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

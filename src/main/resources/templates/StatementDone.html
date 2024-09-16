@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заявка отправлена</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h2 {
+            color: #4CAF50;
+        }
+        p {
+            font-size: 18px;
+            color: #333;
+        }
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Ваша заявка успешно отправлена!</h2>
+
+    <div th:if="${statementFormDto != null}">
+        <p><strong>Имя:</strong> <span th:text="${statementFormDto.name}">[Имя]</span></p>
+        <p><strong>Адрес:</strong> <span th:text="${statementFormDto.street + ', ' + statementFormDto.homeNumber + ', ' + statementFormDto.city}">[Адрес]</span></p>
+        <p>Мы свяжемся с вами по указанному номеру.</p>
+    </div>
+
+    <a href="/statement/new" class="button">Оставить новую заявку</a>
+</div>
+</body>
+</html>
