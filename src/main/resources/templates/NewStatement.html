@@ -1,39 +1,133 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Internet Connection Statement</title>
+    <title>Создать новую заявку</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        h2{
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+        }
+
+        nav ul li a:hover {
+            color: #ddd;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-<h2>Create Internet Connection Statement</h2>
+
+<header>
+    <h1>Заявки на подключение интернета</h1>
+    <nav>
+        <ul>
+            <li><a href="/statement/new">Создать заявку</a></li>
+            <li><a href="/statement/all">Все заявки</a></li>
+        </ul>
+    </nav>
+</header>
+
+
+
 <form action="/statement/new" method="POST" th:object="${statementFormDto}">
-    <label for="city">City:</label>
-    <input type="text" id="city" th:field="*{city}" required><br><br>
-
-    <label for="name">Full Name:</label>
-    <input type="text" id="name" th:field="*{name}"><br><br>
-
-    <label for="street">Street:</label>
-    <input type="text" id="street" th:field="*{street}"><br><br>
-
-    <label for="homeNumber">Home Number:</label>
-    <input type="text" id="homeNumber" th:field="*{homeNumber}"><br><br>
-
-    <label for="mobileNumber">Mobile Number:</label>
-    <input type="text" id="mobileNumber" th:field="*{mobileNumber}"><br><br>
-
-    <label for="description">Description:</label>
-    <textarea id="description" th:field="*{description}"></textarea><br><br>
-
-    <label for="tariff">Tariff:</label>
-    <select id="tariff" th:field="*{tariff}" required>
-        <option value="BASIC">Basic</option>
-        <option value="STANDARD">Standard</option>
-        <option value="PREMIUM">Premium</option>
+    <h2>Создать новую заявку</h2><br><br>
+    <label for="city">Город:</label>
+    <select id="city" th:field="*{city}" required>
+        <option value="" disabled selected>Выберите город</option>
+        <option th:each="city : ${cities}" th:value="${city}" th:text="${city}"></option>
     </select><br><br>
 
-    <input type="submit" value="Создать заявку">
+
+    <label for="name">Имя:</label>
+    <input type="text" id="name" th:field="*{name}" required><br><br>
+
+    <label for="street">Улица:</label>
+    <input type="text" id="street" th:field="*{street}" required><br><br>
+
+    <label for="homeNumber">Дом:</label>
+    <input type="text" id="homeNumber" th:field="*{homeNumber}" required><br><br>
+
+    <label for="mobileNumber">Мобильный номер:</label>
+    <input type="text" id="mobileNumber" th:field="*{mobileNumber}" required><br><br>
+
+    <label for="description">Описание:</label>
+    <textarea id="description" th:field="*{description}" required></textarea><br><br>
+
+    <label for="tariff">Тариф:</label>
+    <select id="tariff" th:field="*{tariff}" required>
+        <option value="BASIC">Базовый</option>
+        <option value="STANDARD">Стандартный</option>
+        <option value="PREMIUM">Премиум</option>
+    </select><br><br>
+
+    <input type="submit" value="Создать заявку" class="button">
 </form>
+
 </body>
 </html>

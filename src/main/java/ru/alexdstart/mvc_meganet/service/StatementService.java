@@ -8,7 +8,9 @@ import java.util.List;
 
 public interface StatementService {
     Statement save(StatementFormDTO statementFormDTO);
-List<Statement> findAllStatements();
 
+    List<Statement> findAllStatements();
+
+    void deleteStatement(long id);
 
 }

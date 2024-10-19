@@ -29,7 +29,12 @@ public class StatementServiceImpl implements StatementService {
         return statementRepository.findAll();  // Возвращает список всех заявок
     }
 
-//    @Override
+    @Override
+    public void deleteStatement(long id) {
+        statementRepository.deleteById(id);
+    }
+
+    //    @Override
 //    public Statement mappingStatementFromDtoInStatement(StatementFormDTO statementFormDTO) {
 //       Statement statement = new Statement();
 //

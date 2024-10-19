@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Заявка отправлена</title>
+    <title>Города</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -40,22 +40,40 @@
             color: #ddd;
         }
 
-        .container {
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 50%; /* Устанавливаем ширину таблицы */
+            margin: 0 auto; /* Центрируем таблицу */
+            border-collapse: collapse;
             background-color: #fff;
-            border-radius: 8px;
-            padding: 20px;
-            max-width: 500px;
-            margin: 0 auto;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
             text-align: center;
         }
 
-        h2 {
-            color: #4CAF50;
+        th {
+            background-color: #4CAF50;
+            color: white;
         }
 
-        p {
-            font-size: 18px;
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e1f5e1;
+        }
+
+        td {
             color: #333;
         }
 
@@ -65,10 +83,27 @@
             padding: 10px 20px;
             text-decoration: none;
             border-radius: 4px;
+            margin-top: 20px;
+            display: inline-block;
         }
 
         .button:hover {
             background-color: #45a049;
+        }
+
+        @media (max-width: 768px) {
+            table {
+                width: 100%;
+            }
+
+            th, td {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            h2 {
+                font-size: 18px;
+            }
         }
     </style>
 </head>
@@ -80,22 +115,27 @@
         <ul>
             <li><a href="/statement/new">Создать заявку</a></li>
             <li><a href="/statement/all">Все заявки</a></li>
-
         </ul>
     </nav>
 </header>
 
-<div class="container">
-    <h2>Ваша заявка успешно отправлена!</h2>
+<h2>Список городов</h2>
 
-    <div th:if="${statementFormDto != null}">
-        <p><strong>Имя:</strong> <span th:text="${statementFormDto.name}">[Имя]</span></p>
-        <p><strong>Адрес:</strong> <span th:text="${statementFormDto.street + ', ' + statementFormDto.homeNumber + ', ' + statementFormDto.city}">[Адрес]</span></p>
-        <p>Мы свяжемся с вами по указанному номеру.</p>
-    </div>
-
-    <a href="/statement/new" class="button">Оставить новую заявку</a>
-</div>
+<table>
+    <thead>
+    <tr>
+        <th>Город</th>
+    </tr>
+    </thead>
+    <tbody>
+    <th:block th:each="city : ${cities}">
+        <tr>
+            <td th:text="${city.cityName}"></td>
+        </tr>
+    </th:block>
+    </tbody>
+</table>
 
 </body>
 </html>
+

@@ -3,17 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Все заявки</title>
+    <title>Список всех заявок</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             margin: 0;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+        }
+
+        nav ul li a:hover {
+            color: #ddd;
         }
 
         h2 {
@@ -23,7 +47,7 @@
         }
 
         table {
-            width: 80%;
+            width: 100%;
             margin: 0 auto;
             border-collapse: collapse;
             background-color: #fff;
@@ -53,7 +77,20 @@
             color: #333;
         }
 
-        /* Адаптивная таблица для небольших экранов */
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+
         @media (max-width: 768px) {
             table {
                 width: 100%;
@@ -72,6 +109,17 @@
 </head>
 <body>
 
+<header>
+    <h1>Заявки на подключение интернета</h1>
+    <nav>
+        <ul>
+            <li><a href="/statement/new">Создать заявку</a></li>
+            <li><a href="/statement/all">Все заявки</a></li>
+
+        </ul>
+    </nav>
+</header>
+
 <h2>Список всех заявок</h2>
 
 <table>
@@ -82,16 +130,22 @@
         <th>Мобильный телефон</th>
         <th>Описание</th>
         <th>Тариф</th>
+        <th>Действия</th>
     </tr>
     </thead>
     <tbody>
-    <!-- Проходим по списку заявок и выводим каждую заявку -->
     <tr th:each="statement : ${statements}">
         <td th:text="${statement.name}"></td>
         <td th:text="${statement.street + ', ' + statement.homeNumber + ', ' + statement.city}"></td>
         <td th:text="${statement.mobileNumber}"></td>
         <td th:text="${statement.description}"></td>
         <td th:text="${statement.tariff}"></td>
+        <td>
+            <form th:action="@{/statement/delete}" method="post">
+                <input type="hidden" th:value="${statement.id}" name="id">
+                <button type="submit">Удалить</button>
+            </form>
+        </td>
     </tr>
     </tbody>
 </table>
